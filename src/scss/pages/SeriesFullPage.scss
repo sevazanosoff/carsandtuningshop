@@ -1,0 +1,11 @@
+.series__page {
+	&-wrapper {
+		margin: 0 auto;
+		max-width: 1280px;
+	}
+	&-blocks {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 40px;
+	}
+}

@@ -1,0 +1,83 @@
+.cart {
+	position: relative;
+	&__wrapper {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+	&__title {
+		padding: 50px 0px;
+	}
+	&__blocks {
+		display: flex;
+		flex-direction: column;
+		gap: 35px;
+		padding-bottom: 50px;
+	}
+	&__total {
+		display: inline-flex;
+		flex-direction: column;
+		padding-bottom: 100px;
+		gap: 20px;
+		&-item {
+			font-size: 20px;
+			font-weight: bold;
+		}
+		&-btns {
+			display: flex;
+			gap: 25px;
+		}
+		&-btn {
+			padding: 10px 30px;
+			background-color: transparent;
+			border: 1px solid black;
+			text-transform: uppercase;
+			text-decoration: none;
+			color: black;
+			font-weight: bold;
+			cursor: pointer;
+			transition: 0.2s ease;
+			&:hover {
+				transition: 0.2s ease;
+				transform: scale(1.1);
+			}
+		}
+	}
+	&__overlay {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.4);
+		opacity: 0;
+		visibility: hidden;
+		&-show {
+			@extend .cart__overlay;
+			top: -80px;
+			left: 0;
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+	&__modal {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -30%);
+		height: 500px;
+		width: 700px;
+		border-radius: 20px;
+		background: #000;
+		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+		opacity: 0;
+		visibility: hidden;
+		&-show {
+			@extend .cart__modal;
+			transform: translate(-50%, -50%);
+			padding: 30px 50px;
+			background: url('../../image/ModalForm/bmw-3-0-csl-stage-teaser.png.asset.1669130154918.png')
+				no-repeat center center;
+			border: 2px solid black;
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}

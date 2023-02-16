@@ -1,0 +1,64 @@
+.form {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	&__svg {
+		position: absolute;
+		cursor: pointer;
+		transition: 0.3s ease;
+		right: 10px;
+		fill: black;
+		top: 10px;
+		&:hover {
+			transition: 0.3s ease;
+			transform: scale(0.7);
+		}
+	}
+	&__text {
+		line-height: 2;
+		margin-top: 20px;
+	}
+	&__input {
+		display: block;
+		box-sizing: border-box;
+		width: 100%;
+		border-radius: 4px;
+		border: 1px solid black;
+		padding: 10px 15px;
+		margin-bottom: 5px;
+		font-size: 14px;
+		&:active {
+			outline: purple;
+		}
+	}
+	&__btn {
+		background: black;
+		opacity: 0.8;
+		border-radius: 15px;
+		color: white;
+		text-transform: uppercase;
+		margin-top: 70px;
+		padding: 20px;
+		font-size: 16px;
+		letter-spacing: 5px;
+		transition: 0.2s ease;
+		cursor: pointer;
+		&:hover {
+			transition: 0.2s ease;
+			transform: scale(1.05);
+		}
+		&:active {
+			transition: 0.3s all;
+			transform: translateY(3px);
+			border: 1px solid transparent;
+			opacity: 0.8;
+		}
+	}
+	&__error {
+		display: block;
+		text-align: left;
+		color: red;
+		font-size: 14px;
+		font-weight: bold;
+	}
+}

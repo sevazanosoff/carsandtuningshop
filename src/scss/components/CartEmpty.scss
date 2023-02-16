@@ -1,0 +1,16 @@
+.cart__empty {
+	display: flex;
+	justify-content: center;
+	&-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding-top: 10%;
+	}
+	&-title {
+		font-size: 56px;
+	}
+	&-subtitle {
+		font-size: 36px;
+	}
+}

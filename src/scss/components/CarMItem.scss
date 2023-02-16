@@ -1,0 +1,243 @@
+// BMW M
+
+.characteristics {
+	padding-bottom: 170px;
+	&__title {
+		text-transform: uppercase;
+		font-size: 42px;
+		padding-bottom: 20px;
+	}
+	&__wrapper {
+		background-color: #103028;
+		height: 700px;
+		width: 1100px;
+		margin: 0 auto;
+	}
+	&__block {
+		position: relative;
+		color: white;
+		display: flex;
+		flex-direction: column;
+		padding: 100px 0 0 100px;
+		max-width: 800px;
+		&-title {
+			font-weight: 500;
+			font-size: 32px;
+		}
+		&-text {
+			font-size: 26px;
+			padding: 30px 0 20px 0;
+		}
+		&-list {
+			font-size: 26px;
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+		}
+		&-image {
+			max-width: 900px;
+			max-height: 700px;
+			position: absolute;
+			bottom: -350px;
+			right: -650px;
+			transform: rotateX(180deg);
+			transform: rotateY(180deg);
+		}
+	}
+}
+
+.spec {
+	padding-bottom: 170px;
+	&__title {
+		text-transform: uppercase;
+		font-size: 42px;
+	}
+	&__about {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: 30px 0px 20px 0px;
+		max-width: 800px;
+		&-subtitle {
+			font-size: 22px;
+		}
+		&-text {
+			font-size: 20px;
+		}
+	}
+
+	&__background {
+		position: relative;
+		&-image {
+			transform: translate(-11.9%, 0%);
+		}
+		&-list {
+			display: inline-flex;
+			flex-direction: row;
+			align-items: end;
+			gap: 30px;
+			position: absolute;
+			bottom: 0;
+			background-color: white;
+			height: 100px;
+			width: 115.8%;
+			list-style: none;
+		}
+		&-item {
+			cursor: pointer;
+			font-size: 20px;
+			font-weight: bold;
+			padding-bottom: 30px;
+			margin-bottom: 4px;
+			border-bottom: 3px solid transparent;
+			color: #666;
+			&:hover {
+				color: black;
+				opacity: 0.9;
+				transition: 0.3s ease-in;
+				border-bottom: 3px solid rgb(11, 63, 95);
+			}
+			&:first-child {
+				margin-left: 50px;
+			}
+		}
+		&-active {
+			border-bottom: 3px solid rgb(11, 63, 95);
+			padding-bottom: 30px;
+			margin-bottom: 4px;
+			color: black;
+		}
+	}
+	&__wrapper {
+		position: relative;
+	}
+	&__blocks {
+		display: flex;
+		justify-content: flex-start;
+		gap: 40px;
+		margin-top: 20px;
+		position: relative;
+	}
+	&__blocks-second {
+		justify-content: flex-end;
+	}
+	&__block {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		max-width: 350px;
+		&-image {
+			max-width: 350px;
+		}
+		&-title {
+			font-weight: 500;
+			font-size: 20px;
+			color: dark;
+		}
+		&-text {
+			font-size: 16px;
+		}
+	}
+}
+
+.next__btn {
+	background-image: url('../../image/CarFullPage/icons8-next-30.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	transform: rotate(360deg);
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 25%;
+	right: 0;
+	cursor: pointer;
+	transition: 0.3s ease;
+	&:hover {
+		transform: scale(1.4);
+	}
+}
+
+.prev__btn {
+	background-image: url('../../image/CarFullPage/icons8-next-30.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	transform: rotate(180deg);
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 25%;
+	left: 0;
+	cursor: pointer;
+	transition: 0.3s ease;
+	&:hover {
+		transform: rotate(180deg) scale(1.4);
+	}
+}
+
+.impression {
+	&__subtitle {
+		padding: 20px 0 20px 0;
+		font-weight: 500;
+		font-size: 22px;
+	}
+	&__image {
+		border: 3px solid white;
+	}
+}
+
+.tuning {
+	padding-bottom: 100px;
+	&__title-tuning {
+		text-transform: uppercase;
+		font-size: 42px;
+	}
+	&__about {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: 30px 0px 20px 0px;
+		max-width: 800px;
+		&-subtitle {
+			font-size: 22px;
+		}
+		&-text {
+			font-size: 20px;
+		}
+	}
+	&__background {
+		position: relative;
+		&-image {
+			transform: translate(-11.9%, 0%);
+		}
+	}
+	&__wrapper {
+		position: relative;
+	}
+	&__blocks {
+		display: flex;
+		justify-content: space-between;
+		background-color: white;
+		border: 30px solid white;
+		position: relative;
+		top: -100px;
+		gap: 40px;
+		margin-top: 20px;
+	}
+	&__block {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		max-width: 350px;
+		&-image {
+			max-width: 350px;
+		}
+		&-title {
+			font-weight: 500;
+			font-size: 20px;
+			color: dark;
+		}
+		&-text {
+			font-size: 16px;
+		}
+	}
+}

@@ -1,0 +1,137 @@
+.tuning__page {
+	&-wrapper {
+		max-width: 1280px;
+		margin: 0 auto;
+		padding-bottom: 50px;
+	}
+	&-blocks {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 25px;
+	}
+	&-block {
+		max-width: 550px;
+	}
+}
+
+.tuning__item {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	&-title {
+		font-size: 24px;
+	}
+	&-image {
+		max-height: 250px;
+		max-width: 350px;
+	}
+	&-subtitle {
+		font-size: 20px;
+		font-weight: bold;
+	}
+	&-code {
+		color: black;
+		padding: 10px 0px 10px 0px;
+		span {
+			font-weight: bold;
+		}
+	}
+	&-text {
+		font-size: 16px;
+		color: black;
+	}
+}
+
+.item__help {
+	border: 1px solid black;
+	box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
+	background-image: url('../../image/TuningFullPage/flag_block_bg.png');
+	background-repeat: no-repeat;
+	padding: 30px 40px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.item__price {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid black;
+	box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
+	padding: 30px;
+	margin: 30px 0px;
+	gap: 15px;
+	&-block {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		transition: 0.1s ease-in;
+		&:hover {
+			transition: 0.1s ease-out;
+			color: orange;
+			fill: orange;
+		}
+	}
+	&-svgactive {
+		fill: orange;
+		stroke: orange;
+	}
+	&-price {
+		font-size: 20px;
+		span {
+			color: red;
+			padding-right: 10px;
+			text-decoration: line-through;
+		}
+	}
+	&-text {
+		font-size: 26px;
+	}
+	&-btn {
+		max-width: 150px;
+		padding: 5px 15px;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: black;
+		background: white;
+		border: 1px solid black;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: 0.2s ease-in;
+		&:hover {
+			transition: 0.2s ease-out;
+			background-color: lightgreen;
+			transform: scale(1.1);
+		}
+	}
+}
+
+.item__contacts {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	border: 1px solid black;
+	box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
+	padding: 30px 40px;
+
+	&-text {
+		padding: 10px 0px;
+	}
+	&-block {
+		display: flex;
+		align-items: center;
+	}
+	&-subtext {
+		padding-left: 10px;
+		font-weight: bold;
+	}
+	&-phoneicon {
+		background: url('../../image/TuningFullPage/icons8-iphone-14-20.png') no-repeat;
+		width: 20px;
+		height: 20px;
+	}
+	&-emailicon {
+		background: url('../../image/TuningFullPage/icons8-mail-24.png') no-repeat;
+		width: 24px;
+		height: 20px;
+	}
+}

@@ -1,0 +1,49 @@
+.dropdown {
+	position: absolute;
+	right: 80px;
+	top: 70px;
+	background-color: black;
+	color: white;
+	padding: 10px;
+	z-index: 5;
+	&::before {
+		content: '';
+		border-style: solid;
+		border-width: 10px 15px 15px 15px;
+		border-color: transparent transparent black transparent;
+		position: absolute;
+		top: -20px;
+	}
+	&__wrapper {
+		padding: 20px 10px;
+	}
+	&__items {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	&__item {
+		display: flex;
+		gap: 10px;
+		&-phoneicon {
+			background: url('../../../image/Dropdown/icons8-iphone-14-20white.png') no-repeat;
+			width: 20px;
+			height: 20px;
+		}
+		&-emailicon {
+			background: url('../../../image/Dropdown/icons8-mail-20white.png') no-repeat;
+			width: 20px;
+			height: 20px;
+		}
+		&-telegramicon {
+			background: url('../../../image/Dropdown/icons8-telegram-app-20white.png') no-repeat;
+			width: 20px;
+			height: 20px;
+		}
+		&-adressicon {
+			background: url('../../../image/Dropdown/icons8-address-20white.png') no-repeat;
+			width: 20px;
+			height: 20px;
+		}
+	}
+}

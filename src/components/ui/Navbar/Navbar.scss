@@ -1,0 +1,22 @@
+.navbar {
+	position: relative;
+	&__list {
+		display: flex;
+		gap: 25px;
+		list-style: none;
+	}
+	&__list-item {
+		display: inline;
+		user-select: none;
+		cursor: pointer;
+		transition: 0.1s ease-out;
+		a {
+			text-decoration: none;
+			color: black;
+		}
+		&:hover {
+			transition: 0.1s ease-in;
+			opacity: 0.5;
+		}
+	}
+}

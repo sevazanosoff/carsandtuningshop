@@ -1,0 +1,28 @@
+.series__block {
+	margin-bottom: 30px;
+	border-bottom: 1px solid lightgray;
+	max-width: 290px;
+
+	&-title {
+		font-size: 22px;
+		padding-bottom: 3px;
+	}
+	&-image {
+		transition: 0.2s ease;
+		cursor: pointer;
+		&:hover {
+			transition: 0.2s ease;
+			transform: scale(1.1);
+		}
+	}
+	&-list {
+		display: inline-flex;
+		gap: 15px;
+		list-style: none;
+		margin-bottom: 15px;
+	}
+	&-hybrid {
+		color: blue;
+		font-weight: bold;
+	}
+}

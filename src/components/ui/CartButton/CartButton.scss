@@ -1,0 +1,30 @@
+.cartbutton {
+	display: inline-flex;
+	position: fixed;
+	bottom: 150px;
+	right: 50px;
+	border-radius: 50%;
+	background: linear-gradient(to bottom right, #0000ff, #1d1f2a, #ff0000);
+	transition: 0.2s ease;
+	cursor: pointer;
+	&:hover {
+		transition: 0.2s ease;
+		transform: scale(1.2);
+	}
+	&__icon {
+		background-image: url('./icons8-shopping-cart-30.png');
+		background-position: center center;
+		background-repeat: no-repeat;
+		height: 60px;
+		width: 60px;
+	}
+	&__count {
+		position: absolute;
+		display: inline-block;
+		background-color: black;
+		color: white;
+		border-radius: 50%;
+		width: 20px;
+		text-align: center;
+	}
+}

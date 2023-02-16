@@ -1,0 +1,68 @@
+.cart__block {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	padding-bottom: 25px;
+	border-bottom: 2px solid lightgray;
+	&-item {
+		font-weight: bold;
+	}
+	&-items {
+		display: flex;
+		gap: 25px;
+	}
+	&-info {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		gap: 15px;
+		div {
+			padding-top: 5px;
+		}
+	}
+	&-remove {
+		position: absolute;
+		background: url('../../image/CartItem/icons8-delete-24.png') no-repeat;
+		width: 24px;
+		height: 24px;
+		top: -25px;
+		left: 0px;
+		cursor: pointer;
+		transition: 0.3s ease;
+		&:hover {
+			background: url('../../image/CartItem/icons8-delete-24-red.png') no-repeat;
+			transition: 0.3s ease;
+		}
+	}
+	&-numbers {
+		display: flex;
+		gap: 100px;
+		position: absolute;
+		right: 555px;
+	}
+	&-image {
+		max-width: 200px;
+	}
+	&-title {
+		font-size: 16px;
+		max-width: 250px;
+	}
+	&-code {
+		font-size: 16px;
+	}
+	&-count {
+		position: relative;
+	}
+	&-plus {
+		position: absolute;
+		right: 25px;
+		user-select: none;
+		cursor: pointer;
+	}
+	&-minus {
+		position: absolute;
+		left: 25px;
+		user-select: none;
+		cursor: pointer;
+	}
+}
