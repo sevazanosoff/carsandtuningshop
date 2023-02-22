@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
+import { motion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid'
 import { Link } from 'react-router-dom'
 
@@ -6,14 +7,14 @@ import { ReactComponent as MLogo } from '../image/SeriesFullPage/BMWM.svg'
 
 import '../scss/components/SeriesDropdown.scss'
 
-const SeriesDropdown = ({ handleItem, setHandleItem, setHandler }) => {
+const SeriesDropdown = forwardRef(({ handleItem, setHandleItem, setHandler }, ref) => {
 	const closeHandler = () => {
 		setHandleItem({})
 		setHandler(false)
 	}
 
 	return (
-		<div className='seriers__page-dropdown series__dropdown'>
+		<div ref={ref} className='seriers__page-dropdown series__dropdown'>
 			<div className='series__dropdown-wrapper'>
 				{handleItem.novelty && <span className='series__dropdown-new'>NEW</span>}
 				{handleItem.tuning === 'M' && <MLogo />}
@@ -48,6 +49,8 @@ const SeriesDropdown = ({ handleItem, setHandleItem, setHandler }) => {
 			</svg>
 		</div>
 	)
-}
+})
 
 export { SeriesDropdown }
+
+export const MSeriesDropdown = motion(SeriesDropdown)

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 import { Series } from '../components/Series'
@@ -19,12 +19,17 @@ const Home = () => {
 			<span ref={ref} className='home__main'>
 				<Tuning />
 			</span>
-			{inView && (
-				<>
-					<UpButton to={'header'} />
-					<CartButton />
-				</>
-			)}
+			<AnimatePresence>
+				{inView && (
+					<motion.span
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1, transition: 0.01 }}
+						exit={{ opacity: 0 }}>
+						<UpButton to={'header'} />
+						<CartButton />
+					</motion.span>
+				)}
+			</AnimatePresence>
 		</section>
 	)
 }

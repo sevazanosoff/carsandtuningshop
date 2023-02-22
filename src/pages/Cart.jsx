@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -32,8 +33,31 @@ const Cart = () => {
 		}
 	}
 
+	const modalVariants = {
+		visible: {
+			opacity: 1,
+			scale: 1,
+			transition: {
+				ease: 'easeOut',
+				duration: 0.15,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			scale: 0.75,
+		},
+		exit: {
+			opacity: 0,
+			scale: 0.75,
+			transition: {
+				ease: 'easeIn',
+				duration: 0.15,
+			},
+		},
+	}
+
 	return (
-		<section className='cart'>
+		<section className={open ? 'cart-overflow' : 'cart'}>
 			<div className='cart__wrapper'>
 				<h1 className='cart__title'>Cart</h1>
 				{cartItems.length > 0 ? (
@@ -64,23 +88,32 @@ const Cart = () => {
 									Continue shopping
 								</Link>
 							</div>
-							{open && (
-								<div
-									onClick={closeModal}
-									className={open ? 'cart__overlay-show' : 'cart__overlay'}>
-									<div
-										onClick={e => e.stopPropagation()}
-										className={open ? 'cart__modal-show' : 'cart__modal'}>
-										<ModalForm closeModal={closeModal} />
-									</div>
-								</div>
-							)}
 						</div>
 					</>
 				) : (
 					<CartEmpty />
 				)}
 			</div>
+			<AnimatePresence>
+				{open && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						onClick={closeModal}
+						className={open ? 'cart__overlay-show' : 'cart__overlay'}>
+						<motion.div
+							initial='hidden'
+							whileInView='visible'
+							exit='exit'
+							variants={modalVariants}
+							onClick={e => e.stopPropagation()}
+							className={open ? 'cart__modal-show' : 'cart__modal'}>
+							<ModalForm closeModal={closeModal} />
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</section>
 	)
 }

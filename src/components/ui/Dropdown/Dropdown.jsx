@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
+import { motion } from 'framer-motion'
 
 import './Dropdown.scss'
 
-const Dropdown = ({ open, onClose, handleRef }) => {
+const Dropdown = forwardRef(({ open, onClose }, ref) => {
 	const dropdownRef = React.useRef(null)
 
 	React.useEffect(() => {
@@ -21,8 +22,8 @@ const Dropdown = ({ open, onClose, handleRef }) => {
 	}, [open, onClose])
 
 	return (
-		<div ref={dropdownRef} className='dropdown'>
-			<div className='dropdown__wrapper'>
+		<div ref={ref} className='dropdown'>
+			<div ref={dropdownRef} className='dropdown__wrapper'>
 				<div className='dropdown__items'>
 					<div className='dropdown__item'>
 						<span className='dropdown__item-phoneicon'></span>
@@ -44,6 +45,8 @@ const Dropdown = ({ open, onClose, handleRef }) => {
 			</div>
 		</div>
 	)
-}
+})
 
 export { Dropdown }
+
+export const MDropdown = motion(Dropdown)

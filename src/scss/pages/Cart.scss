@@ -1,4 +1,8 @@
 .cart {
+	&-overflow {
+		@extend .cart;
+		overflow: hidden;
+	}
 	position: relative;
 	&__wrapper {
 		max-width: 1280px;
@@ -43,7 +47,7 @@
 		}
 	}
 	&__overlay {
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		height: 120%;
 		background-color: rgba(0, 0, 0, 0.4);
@@ -51,17 +55,14 @@
 		visibility: hidden;
 		&-show {
 			@extend .cart__overlay;
-			top: -80px;
+			top: 0;
 			left: 0;
 			opacity: 1;
 			visibility: visible;
 		}
 	}
 	&__modal {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -30%);
+		position: relative;
 		height: 500px;
 		width: 700px;
 		border-radius: 20px;
@@ -71,7 +72,8 @@
 		visibility: hidden;
 		&-show {
 			@extend .cart__modal;
-			transform: translate(-50%, -50%);
+			margin: 0 auto;
+			top: 10%;
 			padding: 30px 50px;
 			background: url('../../image/ModalForm/bmw-3-0-csl-stage-teaser.png.asset.1669130154918.png')
 				no-repeat center center;

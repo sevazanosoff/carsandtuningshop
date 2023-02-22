@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,18 +26,58 @@ const Tuning = () => {
 		return <Loading />
 	}
 
+	const titleVariants = {
+		visible: custom => ({
+			opacity: 1,
+			x: 0,
+			transition: {
+				delay: custom * 0.2,
+			},
+		}),
+		hidden: {
+			opacity: 0,
+			x: 100,
+		},
+	}
+
+	const listVariants = {
+		visible: custom => ({
+			opacity: 1,
+			transition: {
+				delay: custom * 0.01,
+			},
+		}),
+		hidden: {
+			opacity: 0,
+		},
+	}
+
 	return (
-		<section className='tuning' id='tuning'>
+		<motion.section
+			initial='hidden'
+			whileInView='visible'
+			viewport={{ amount: 0.2, once: true }}
+			className='tuning'
+			id='tuning'>
 			<div className='tuning__wrapper'>
-				<h1 className='tuning__title'>Here the shop when you can upgrade you car!</h1>
-				<ul className='tuning__list'>
-					{items.map(item => (
+				<motion.h1 variants={titleVariants} custom={1} className='tuning__title'>
+					Here the shop when you can upgrade you car!
+				</motion.h1>
+				<motion.ul
+					initial='hidden'
+					animate='visible'
+					viewport={{ amount: 0.2, once: true }}
+					className='tuning__list'>
+					{items.map((item, index) => (
 						<Link
 							className='tuning__list-link'
 							key={uuidv4()}
 							to={`tuning/${item.code}`}
 							state={{ item: item }}>
-							<li className='tuning__list-item list__item'>
+							<motion.li
+								variants={listVariants}
+								custom={index}
+								className='tuning__list-item list__item'>
 								{+item.discount > 0 && (
 									<p className='list__item-discount'>-{item.discount}%</p>
 								)}
@@ -49,12 +90,12 @@ const Tuning = () => {
 										: item.price}
 									$
 								</p>
-							</li>
+							</motion.li>
 						</Link>
 					))}
-				</ul>
+				</motion.ul>
 			</div>
-		</section>
+		</motion.section>
 	)
 }
 export { Tuning }

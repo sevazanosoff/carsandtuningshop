@@ -4,7 +4,7 @@ import { Link } from 'react-scroll'
 
 import '../scss/components/SeriesItem.scss'
 
-const SeriesItem = ({ car, handler, handleItem, setHandler, setHandleItem }) => {
+const SeriesItem = ({ car, handleItem, setHandler, setHandleItem }) => {
 	const changeHandler = item => {
 		if (handleItem.subimage === item.subimage) {
 			setHandleItem({})

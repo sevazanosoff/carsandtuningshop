@@ -1,4 +1,6 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -22,7 +24,18 @@ const Header = () => {
 
 	return (
 		<>
-			<header id='header' className='header'>
+			<motion.header
+				initial={{
+					y: -100,
+				}}
+				animate={{
+					y: 0,
+				}}
+				transition={{
+					delay: 0.2,
+				}}
+				id='header'
+				className='header'>
 				<div className='container'>
 					<div className='header__wrapper'>
 						<Link className='header__logo' to='/'>
@@ -32,7 +45,7 @@ const Header = () => {
 						{location.pathname === '/' && <Navbar />}
 					</div>
 				</div>
-			</header>
+			</motion.header>
 		</>
 	)
 }

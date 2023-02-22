@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -30,11 +31,45 @@ const TuningFullPage = () => {
 		return <Loading />
 	}
 
+	const blockLeftVariants = {
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: {
+				delay: 0.1,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			x: -100,
+		},
+	}
+
+	const blockRightVariants = {
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: {
+				delay: 0.1,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			x: 100,
+		},
+	}
+
 	return (
-		<section className='tuning__page'>
+		<motion.section
+			initial='hidden'
+			whileInView='visible'
+			viewport={{ once: true }}
+			className='tuning__page'>
 			<div className='tuning__page-wrapper'>
 				<div className='tuning__page-blocks'>
-					<div className='tuning__page-block tuning__block'>
+					<motion.div
+						variants={blockLeftVariants}
+						className='tuning__page-block tuning__block'>
 						<div className='tuning__block-item tuning__item'>
 							<h1 className='tuning__item-title'>{data.title}</h1>
 							<img src={state.item.image} alt='item' className='tuning__item-image' />
@@ -48,8 +83,10 @@ const TuningFullPage = () => {
 								</p>
 							))}
 						</div>
-					</div>
-					<div className='tuning__page-block tuning__block'>
+					</motion.div>
+					<motion.div
+						variants={blockRightVariants}
+						className='tuning__page-block tuning__block'>
 						<div className='tuning__block-item tuning__item'>
 							<aside className='tuning__item-help item__help'>
 								50% of the profit of our online store will be transferred to
@@ -98,10 +135,10 @@ const TuningFullPage = () => {
 								</div>
 							</aside>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 			</div>
-		</section>
+		</motion.section>
 	)
 }
 

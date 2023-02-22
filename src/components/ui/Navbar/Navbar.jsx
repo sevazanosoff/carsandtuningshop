@@ -1,7 +1,9 @@
 import React from 'react'
+import { AnimatePresence } from 'framer-motion'
+
 import { Link as LinkScroll } from 'react-scroll'
 import { Link as LinkRRD } from 'react-router-dom'
-import { Dropdown } from '../Dropdown/Dropdown'
+import { MDropdown } from '../Dropdown/Dropdown'
 
 import './Navbar.scss'
 
@@ -16,6 +18,23 @@ const Navbar = () => {
 	const openHandler = e => {
 		e.stopPropagation()
 		setOpen(open => !open)
+	}
+
+	const dropdownVariants = {
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: {
+				delay: 0.1,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			y: -100,
+		},
+		exit: {
+			opacity: 0,
+		},
 	}
 
 	return (
@@ -51,7 +70,19 @@ const Navbar = () => {
 						Contacts
 					</li>
 				</ul>
-				{open && <Dropdown open={open} onClose={onClose} handleRef={handleRef} />}
+				<AnimatePresence>
+					{open && (
+						<MDropdown
+							initial='hidden'
+							animate='visible'
+							exit='exit'
+							variants={dropdownVariants}
+							open={open}
+							onClose={onClose}
+							handleRef={handleRef}
+						/>
+					)}
+				</AnimatePresence>
 			</nav>
 		</>
 	)
