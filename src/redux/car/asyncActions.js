@@ -5,7 +5,6 @@ export const fetchCar = createAsyncThunk(
         let res
         // Вместо этого должен быть запрос который по параметру отправляет запрос и отдает нам ответ :)))
         // + обязательно сделал бы файл http и instance для моего запроса.
-        console.log(param)
         switch (param) {
             case '3seriesSedan':
                 res = {

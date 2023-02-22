@@ -37,11 +37,10 @@
 	&-numbers {
 		display: flex;
 		gap: 100px;
-		position: absolute;
-		right: 555px;
+		transform: translate(-145%);
 	}
 	&-image {
-		max-width: 200px;
+		width: 200px;
 	}
 	&-title {
 		font-size: 16px;
@@ -64,5 +63,47 @@
 		left: 25px;
 		user-select: none;
 		cursor: pointer;
+	}
+	@media (max-width: 1150px) {
+		&-numbers {
+			transform: translate(-65%);
+		}
+		&-info {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			div {
+				padding-top: 5px;
+			}
+		}
+	}
+	@media (max-width: 790px) {
+		&-info {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			div {
+				padding-top: 5px;
+			}
+		}
+		&-image {
+			width: 150px;
+		}
+		&-title {
+			font-size: 16px;
+			max-width: 200px;
+		}
+	}
+	@media (max-width: 790px) {
+		&-numbers {
+			gap: 70px;
+		}
+		&-image {
+			width: 100px;
+		}
+		&-title {
+			font-size: 14px;
+			max-width: 150px;
+		}
 	}
 }

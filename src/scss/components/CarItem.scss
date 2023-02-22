@@ -25,8 +25,8 @@
 		max-width: 580px;
 		gap: 5px;
 		&-image {
-			height: 350px;
-			width: 600px;
+			height: 100%;
+			width: 100%;
 		}
 		&-title {
 			padding-top: 10px;
@@ -36,6 +36,53 @@
 			font-size: 18px;
 		}
 	}
+	@media (max-width: 1400px) {
+		padding-bottom: 150px;
+		&__title {
+			font-size: 38px;
+		}
+		&__list {
+			padding-bottom: 20px;
+		}
+		&__block {
+			max-width: 100%;
+			gap: 5px;
+			width: 550px;
+			&-image {
+				height: 300px;
+			}
+		}
+	}
+	@media (max-width: 997px) {
+		padding-bottom: 100px;
+		&__title {
+			font-size: 34px;
+		}
+		&__block {
+			max-width: 100%;
+			&-image {
+				height: 250px;
+			}
+		}
+	}
+	@media (max-width: 780px) {
+		padding-bottom: 70px;
+		&__title {
+			font-size: 28px;
+		}
+		&__block {
+			max-width: 300px;
+			&-image {
+				height: 250px;
+			}
+		}
+	}
+}
+
+.slick-slide > div {
+	display: grid;
+	place-items: center;
+	padding: 20px 0;
 }
 
 .design {
@@ -48,6 +95,24 @@
 	&__subtitle {
 		font-size: 32px;
 		padding: 90px 0 70px 0;
+	}
+	@media (max-width: 1400px) {
+		padding-bottom: 150px;
+		&__title {
+			font-size: 38px;
+		}
+	}
+	@media (max-width: 997px) {
+		padding-bottom: 100px;
+		&__title {
+			font-size: 34px;
+		}
+	}
+	@media (max-width: 780px) {
+		padding-bottom: 70px;
+		&__title {
+			font-size: 28px;
+		}
 	}
 }
 
@@ -63,6 +128,24 @@
 	&__list {
 		padding-bottom: 20px;
 	}
+	@media (max-width: 1400px) {
+		padding-bottom: 150px;
+		&__title {
+			font-size: 38px;
+		}
+	}
+	@media (max-width: 997px) {
+		padding-bottom: 100px;
+		&__title {
+			font-size: 34px;
+		}
+	}
+	@media (max-width: 780px) {
+		padding-bottom: 170px;
+		&__title {
+			font-size: 28px;
+		}
+	}
 }
 
 .specification {
@@ -73,6 +156,7 @@
 	}
 	&__text {
 		padding: 30px 0 20px 0;
+		font-size: 20px;
 	}
 	&__blocks {
 		display: flex;
@@ -99,6 +183,52 @@
 			font-weight: bold;
 		}
 	}
+	@media (max-width: 1400px) {
+		padding-bottom: 150px;
+		&__title {
+			font-size: 38px;
+		}
+		&__block {
+			&-title {
+				font-weight: 500;
+				font-size: 14px;
+			}
+			&-text {
+				font-weight: bold;
+				font-size: 14px;
+			}
+			&-image {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+	@media (max-width: 997px) {
+		padding-bottom: 100px;
+		&__title {
+			font-size: 34px !important;
+		}
+		&__blocks {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		&__block {
+			max-width: 100%;
+			&-item {
+				display: flex;
+				justify-content: space-between;
+				padding-bottom: 10px;
+				border-bottom: 1px solid lightgray;
+			}
+		}
+	}
+	@media (max-width: 780px) {
+		padding-bottom: 70px;
+		&__title {
+			font-size: 28px !important;
+		}
+	}
 }
 
 .accesorie {
@@ -110,5 +240,23 @@
 	&__text {
 		font-size: 20px;
 		padding: 30px 0 20px 0;
+	}
+	@media (max-width: 1400px) {
+		padding-bottom: 150px;
+		&__title {
+			font-size: 38px;
+		}
+	}
+	@media (max-width: 997px) {
+		padding-bottom: 100px;
+		x &__title {
+			font-size: 34px;
+		}
+	}
+	@media (max-width: 780px) {
+		padding-bottom: 70px;
+		&__title {
+			font-size: 28px;
+		}
 	}
 }

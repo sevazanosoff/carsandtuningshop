@@ -1,13 +1,13 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { Link as LinkScroll } from 'react-scroll'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSeriesItem } from '../redux/series/asyncActions'
 
 import { SeriesItem } from '../components/SeriesItem'
 import { SeriesDropdown } from '../components/SeriesDropdown'
+import { Loading } from '../components/ui/Loading/Loading'
 
 import '../scss/pages/SeriesFullPage.scss'
 
@@ -23,6 +23,10 @@ const SeriesFullPage = () => {
 		dispatch(fetchSeriesItem(params.series))
 	}, [])
 
+	if (status === 'loading') {
+		return <Loading />
+	}
+
 	return (
 		<section className='series__page'>
 			<div className='series__page-wrapper'>
@@ -34,6 +38,7 @@ const SeriesFullPage = () => {
 							handleItem={handleItem}
 							setHandler={setHandler}
 							setHandleItem={setHandleItem}
+							handler={handler}
 						/>
 					))}
 				</div>

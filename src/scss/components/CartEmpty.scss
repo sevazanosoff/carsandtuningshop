@@ -13,4 +13,21 @@
 	&-subtitle {
 		font-size: 36px;
 	}
+	@media (max-width: 1400px) {
+		&-wrapper {
+			padding: 0 20px;
+		}
+	}
+	@media (max-width: 770px) {
+		&-wrapper {
+			margin: 0 auto;
+			align-items: center;
+		}
+		&-title {
+			font-size: 26px;
+		}
+		&-subtitle {
+			font-size: 16px;
+		}
+	}
 }

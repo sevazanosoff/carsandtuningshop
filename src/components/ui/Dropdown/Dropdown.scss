@@ -1,7 +1,7 @@
 .dropdown {
 	position: absolute;
-	right: 80px;
-	top: 70px;
+	left: 80%;
+	top: 30px;
 	background-color: black;
 	color: white;
 	padding: 10px;
@@ -45,5 +45,32 @@
 			width: 20px;
 			height: 20px;
 		}
+	}
+	@media (max-width: 1800px) {
+		left: 0;
+		&::before {
+			top: -20px;
+			right: 20px;
+		}
+	}
+	@media (max-width: 1197px) {
+		left: 20%;
+		top: 40px;
+		&::before {
+			top: -20px;
+			right: 20px;
+		}
+		&__wrapper {
+			padding: 15px 10px;
+		}
+		&__items {
+			gap: 10px;
+		}
+		&__item {
+			font-size: 16px;
+		}
+	}
+	@media (max-width: 797px) {
+		display: none;
 	}
 }

@@ -13,7 +13,7 @@ const SeriesDropdown = ({ handleItem, setHandleItem, setHandler }) => {
 	}
 
 	return (
-		<div id='series__dropdown' className='seriers__page-dropdown series__dropdown'>
+		<div className='seriers__page-dropdown series__dropdown'>
 			<div className='series__dropdown-wrapper'>
 				{handleItem.novelty && <span className='series__dropdown-new'>NEW</span>}
 				{handleItem.tuning === 'M' && <MLogo />}

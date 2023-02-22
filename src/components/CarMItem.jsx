@@ -10,6 +10,7 @@ import '../scss/components/CarMItem.scss'
 const CarMItem = ({ data, car }) => {
 	const [handleFeatures, setHandleFeatures] = React.useState(true)
 	const [handleTech, setHandleTech] = React.useState(true)
+	// Slider settings:
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -18,7 +19,45 @@ const CarMItem = ({ data, car }) => {
 		slidesToShow: 3,
 		slidesToScroll: 1,
 		padSlides: true,
+		responsive: [
+			{
+				breakpoint: 997,
+				settings: {
+					slidesToShow: 2,
+				},
+			},
+			{
+				breakpoint: 697,
+				settings: {
+					slidesToShow: 1,
+				},
+			},
+		],
 	}
+	const settingsBlocks = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 2,
+		slidesToScroll: 1,
+		padSlides: true,
+		responsive: [
+			{
+				breakpoint: 780,
+				settings: {
+					slidesToShow: 1,
+				},
+			},
+		],
+	}
+
+	React.useEffect(() => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		})
+	}, [])
+
 	return (
 		<>
 			<div className='main__characteristics characteristics'>
@@ -36,12 +75,8 @@ const CarMItem = ({ data, car }) => {
 								</li>
 							))}
 						</ul>
-						<img
-							className='characteristics__block-image'
-							src={car.about.background}
-							alt='bmw'
-						/>
 					</div>
+					<img className='characteristics__image' src={car.about.background} alt='bmw' />
 				</div>
 			</div>
 			<div id='features' className='main__features spec'>
@@ -90,50 +125,81 @@ const CarMItem = ({ data, car }) => {
 							</li>
 						</ul>
 					</div>
-					<div
-						className={
-							handleFeatures ? 'spec__blocks ' : 'spec__blocks spec__blocks-second'
-						}>
-						{handleFeatures &&
-							car.features.dynamic.map(item => (
-								<div key={uuidv4()} className='spec__block'>
-									<img
-										className='spec__block-image'
-										src={item.photo}
-										alt='photodynamic'
-									/>
-									<h3 className='spec__block-title'>{item.title}</h3>
-									<p className='spec__block-text'>{item.text}</p>
-								</div>
-							))}
-						{handleFeatures ? (
-							<span
-								src='../image/CarFullPage/icons8-next-30.png'
-								onClick={() => setHandleFeatures(false)}
-								className='spec__button-next next__btn'
-								alt='next-button'
-							/>
-						) : (
-							<span
-								src='../image/CarFullPage/icons8-more-than-30.png'
-								onClick={() => setHandleFeatures(true)}
-								className='spec__button-prev prev__btn'
-								alt='prev-button'
-							/>
-						)}
-						{!handleFeatures &&
-							car.features.design.map(item => (
-								<div key={uuidv4()} className='spec__block'>
-									<img
-										className='spec__block-image'
-										src={item.photo}
-										alt='photodesign'
-									/>
-									<h3 className='spec__block-title'>{item.title}</h3>
-									<p className='spec__block-text'>{item.text}</p>
-								</div>
-							))}
-					</div>
+					{window.screen.width < 1200 ? (
+						<Slider {...settingsBlocks}>
+							{handleFeatures &&
+								car.features.dynamic.map(item => (
+									<div key={uuidv4()} className='spec__block'>
+										<img
+											className='spec__block-image'
+											src={item.photo}
+											alt='photodynamic'
+										/>
+										<h3 className='spec__block-title'>{item.title}</h3>
+										<p className='spec__block-text'>{item.text}</p>
+									</div>
+								))}
+							{!handleFeatures &&
+								car.features.design.map(item => (
+									<div key={uuidv4()} className='spec__block'>
+										<img
+											className='spec__block-image'
+											src={item.photo}
+											alt='photodesign'
+										/>
+										<h3 className='spec__block-title'>{item.title}</h3>
+										<p className='spec__block-text'>{item.text}</p>
+									</div>
+								))}
+						</Slider>
+					) : (
+						<div
+							className={
+								handleFeatures
+									? 'spec__blocks '
+									: 'spec__blocks spec__blocks-second'
+							}>
+							{handleFeatures &&
+								car.features.dynamic.map(item => (
+									<div key={uuidv4()} className='spec__block'>
+										<img
+											className='spec__block-image'
+											src={item.photo}
+											alt='photodynamic'
+										/>
+										<h3 className='spec__block-title'>{item.title}</h3>
+										<p className='spec__block-text'>{item.text}</p>
+									</div>
+								))}
+							{handleFeatures ? (
+								<span
+									src='../image/CarFullPage/icons8-next-30.png'
+									onClick={() => setHandleFeatures(false)}
+									className='spec__button-next next__btn'
+									alt='next-button'
+								/>
+							) : (
+								<span
+									src='../image/CarFullPage/icons8-more-than-30.png'
+									onClick={() => setHandleFeatures(true)}
+									className='spec__button-prev prev__btn'
+									alt='prev-button'
+								/>
+							)}
+							{!handleFeatures &&
+								car.features.design.map(item => (
+									<div key={uuidv4()} className='spec__block'>
+										<img
+											className='spec__block-image'
+											src={item.photo}
+											alt='photodesign'
+										/>
+										<h3 className='spec__block-title'>{item.title}</h3>
+										<p className='spec__block-text'>{item.text}</p>
+									</div>
+								))}
+						</div>
+					)}
 				</div>
 			</div>
 			<div className='main__impression spec'>
@@ -179,7 +245,7 @@ const CarMItem = ({ data, car }) => {
 										? 'spec__background-item spec__background-active'
 										: 'spec__background-item'
 								}>
-								M instrument panel and operating concept
+								Panel and concept
 							</li>
 							<li
 								onClick={() => setHandleTech(false)}
@@ -188,54 +254,83 @@ const CarMItem = ({ data, car }) => {
 										? 'spec__background-item spec__background-active'
 										: 'spec__background-item'
 								}>
-								Driver assistance systems
+								Assistance
 							</li>
 						</ul>
 					</div>
-					<div
-						className={
-							handleTech ? 'spec__blocks ' : 'spec__blocks spec__blocks-second'
-						}>
-						{handleTech &&
-							car.technologies.panel.map(item => (
-								<div key={uuidv4()} className='spec__block'>
-									<img
-										className='spec__block-image'
-										src={item.photo}
-										alt='photodynamic'
-									/>
-									<h3 className='spec__block-title'>{item.title}</h3>
-									<p className='spec__block-text'>{item.text}</p>
-								</div>
-							))}
-						{handleTech ? (
-							<span
-								src='../image/CarFullPage/icons8-next-30.png'
-								onClick={() => setHandleTech(false)}
-								className='spec__button-next next__btn'
-								alt='next-button'
-							/>
-						) : (
-							<span
-								src='../image/CarFullPage/icons8-more-than-30.png'
-								onClick={() => setHandleTech(true)}
-								className='spec__button-prev prev__btn'
-								alt='prev-button'
-							/>
-						)}
-						{!handleTech &&
-							car.technologies.helpSystem.map(item => (
-								<div key={uuidv4()} className='spec__block'>
-									<img
-										className='spec__block-image'
-										src={item.photo}
-										alt='photodesign'
-									/>
-									<h3 className='spec__block-title'>{item.title}</h3>
-									<p className='spec__block-text'>{item.text}</p>
-								</div>
-							))}
-					</div>
+					{window.screen.width < 1200 ? (
+						<Slider {...settingsBlocks}>
+							{handleTech &&
+								car.technologies.panel.map(item => (
+									<div key={uuidv4()} className='spec__block'>
+										<img
+											className='spec__block-image'
+											src={item.photo}
+											alt='photodynamic'
+										/>
+										<h3 className='spec__block-title'>{item.title}</h3>
+										<p className='spec__block-text'>{item.text}</p>
+									</div>
+								))}
+							{!handleTech &&
+								car.technologies.helpSystem.map(item => (
+									<div key={uuidv4()} className='spec__block'>
+										<img
+											className='spec__block-image'
+											src={item.photo}
+											alt='photodesign'
+										/>
+										<h3 className='spec__block-title'>{item.title}</h3>
+										<p className='spec__block-text'>{item.text}</p>
+									</div>
+								))}
+						</Slider>
+					) : (
+						<div
+							className={
+								handleTech ? 'spec__blocks ' : 'spec__blocks spec__blocks-second'
+							}>
+							{handleTech &&
+								car.technologies.panel.map(item => (
+									<div key={uuidv4()} className='spec__block'>
+										<img
+											className='spec__block-image'
+											src={item.photo}
+											alt='photodynamic'
+										/>
+										<h3 className='spec__block-title'>{item.title}</h3>
+										<p className='spec__block-text'>{item.text}</p>
+									</div>
+								))}
+							{handleTech ? (
+								<span
+									src='../image/CarFullPage/icons8-next-30.png'
+									onClick={() => setHandleTech(false)}
+									className='spec__button-next next__btn'
+									alt='next-button'
+								/>
+							) : (
+								<span
+									src='../image/CarFullPage/icons8-more-than-30.png'
+									onClick={() => setHandleTech(true)}
+									className='spec__button-prev prev__btn'
+									alt='prev-button'
+								/>
+							)}
+							{!handleTech &&
+								car.technologies.helpSystem.map(item => (
+									<div key={uuidv4()} className='spec__block'>
+										<img
+											className='spec__block-image'
+											src={item.photo}
+											alt='photodesign'
+										/>
+										<h3 className='spec__block-title'>{item.title}</h3>
+										<p className='spec__block-text'>{item.text}</p>
+									</div>
+								))}
+						</div>
+					)}
 				</div>
 			</div>
 			<div id='specification' className='main__specification specification'>
@@ -283,19 +378,35 @@ const CarMItem = ({ data, car }) => {
 							alt='background'
 						/>
 					</div>
-					<div className='tuning__blocks'>
-						{car.tuning.items.map(item => (
-							<div key={uuidv4()} className='tuning__block'>
-								<img
-									className='tuning__block-image'
-									src={item.photo}
-									alt='photodynamic'
-								/>
-								<h3 className='tuning__block-title'>{item.title}</h3>
-								<p className='tuning__block-text'>{item.text}</p>
-							</div>
-						))}
-					</div>
+					{window.screen.width < 1200 ? (
+						<Slider {...settingsBlocks}>
+							{car.tuning.items.map(item => (
+								<div key={uuidv4()} className='tuning__block'>
+									<img
+										className='tuning__block-image'
+										src={item.photo}
+										alt='photodynamic'
+									/>
+									<h3 className='tuning__block-title'>{item.title}</h3>
+									<p className='tuning__block-text'>{item.text}</p>
+								</div>
+							))}
+						</Slider>
+					) : (
+						<div className='tuning__blocks'>
+							{car.tuning.items.map(item => (
+								<div key={uuidv4()} className='tuning__block'>
+									<img
+										className='tuning__block-image'
+										src={item.photo}
+										alt='photodynamic'
+									/>
+									<h3 className='tuning__block-title'>{item.title}</h3>
+									<p className='tuning__block-text'>{item.text}</p>
+								</div>
+							))}
+						</div>
+					)}
 				</div>
 			</div>
 		</>

@@ -45,7 +45,7 @@
 	&__overlay {
 		position: absolute;
 		width: 100%;
-		height: 100vh;
+		height: 120%;
 		background-color: rgba(0, 0, 0, 0.4);
 		opacity: 0;
 		visibility: hidden;
@@ -78,6 +78,29 @@
 			border: 2px solid black;
 			opacity: 1;
 			visibility: visible;
+		}
+	}
+	@media (max-width: 1400px) {
+		padding: 0 20px;
+	}
+	@media (max-width: 780px) {
+		&__modal {
+			height: 450px;
+			width: 500px;
+		}
+	}
+	@media (max-width: 580px) {
+		&__modal {
+			height: 450px;
+			width: 370px;
+		}
+	}
+	@media (max-width: 480px) {
+		&__total {
+			&-btn {
+				padding: 10px 20px;
+				text-align: center;
+			}
 		}
 	}
 }

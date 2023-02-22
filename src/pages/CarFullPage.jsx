@@ -2,14 +2,12 @@ import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Link as LinkScroll } from 'react-scroll'
 import { useLocation, Link } from 'react-router-dom'
-import { useInView } from 'react-intersection-observer'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchCar } from '../redux/car/asyncActions'
 
 import { CarItem } from '../components/CarItem'
 import { CarMItem } from '../components/CarMItem'
-import { UpButton } from '../components/ui/UpButton/UpButton'
 import { Loading } from '../components/ui/Loading/Loading'
 
 import { carTitle } from '../utils/carTitle'
@@ -18,7 +16,6 @@ import '../scss/pages/CarFullPage.scss'
 
 const CarFullPage = () => {
 	const [tuned, setTuned] = React.useState(false)
-	const { ref, inView } = useInView()
 
 	const dispatch = useDispatch()
 	const { state } = useLocation()
@@ -40,7 +37,7 @@ const CarFullPage = () => {
 	if (status === 'success') {
 		return (
 			<section id='car' className='car'>
-				<header ref={ref} className='car__header'>
+				<header className='car__header'>
 					<h1 className='car__header-title'>{state.data.title}</h1>
 					{tuned && (
 						<img
@@ -130,11 +127,6 @@ const CarFullPage = () => {
 						) : (
 							<CarItem data={state.data} car={car} />
 						)}
-						{!inView && (
-							<>
-								<UpButton to={'car'} />
-							</>
-						)}
 					</div>
 				</main>
 				<footer className='car__footer'>
@@ -145,6 +137,7 @@ const CarFullPage = () => {
 					<div className='car__footer-blocks'>
 						<div className='car__footer-block'>
 							<img
+								className='car__footer-image'
 								src='https://www.bmw.ua/content/dam/bmw/common/all-models/3-series/sedan/2022/highlights/bmw-3-series-sedan-ms-bmw-services.jpg/jcr:content/renditions/cq5dam.resized.img.585.low.time1650668963539.jpg'
 								alt='footerphoto'
 							/>

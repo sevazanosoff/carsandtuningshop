@@ -19,4 +19,22 @@
 			opacity: 0.5;
 		}
 	}
+
+	@media (max-width: 1197px) {
+		font-size: 24px;
+		&__list {
+			gap: 10px;
+		}
+	}
+	// Буде бургер-меню потiм..
+	@media (max-width: 797px) {
+		&__list-item {
+			&:last-child {
+				display: none;
+			}
+		}
+	}
+	@media (max-width: 770px) {
+		font-size: 18px;
+	}
 }

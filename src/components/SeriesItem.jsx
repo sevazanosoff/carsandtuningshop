@@ -1,9 +1,10 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { Link } from 'react-scroll'
 
 import '../scss/components/SeriesItem.scss'
 
-const SeriesItem = ({ car, handleItem, setHandler, setHandleItem }) => {
+const SeriesItem = ({ car, handler, handleItem, setHandler, setHandleItem }) => {
 	const changeHandler = item => {
 		if (handleItem.subimage === item.subimage) {
 			setHandleItem({})
@@ -18,20 +19,35 @@ const SeriesItem = ({ car, handleItem, setHandler, setHandleItem }) => {
 		<div id='series_car' className='series__page-block series__block'>
 			<div className='series__block-wrapper'>
 				{handleItem.image === car.image ? (
-					<img
-						className='series__block-image'
-						src={car.image}
-						style={{ opacity: '0.7' }}
-						alt='iconcar'
-						onClick={() => changeHandler(car)}
-					/>
+					<Link
+						to={handleItem.subimage === car.subimage ? '' : 'footer'}
+						spy={true}
+						smooth={true}
+						offset={0}
+						duration={700}
+						isDynamic={false}>
+						<img
+							className='series__block-image'
+							src={car.image}
+							style={{ opacity: '0.7' }}
+							alt='iconcar'
+							onClick={() => changeHandler(car)}
+						/>
+					</Link>
 				) : (
-					<img
-						className='series__block-image'
-						src={car.image}
-						alt='iconcar'
-						onClick={() => changeHandler(car)}
-					/>
+					<Link
+						to={handleItem.subimage === car.subimage ? '' : 'footer'}
+						spy={true}
+						smooth={true}
+						offset={0}
+						duration={700}>
+						<img
+							className='series__block-image'
+							src={car.image}
+							alt='iconcar'
+							onClick={() => changeHandler(car)}
+						/>
+					</Link>
 				)}
 				<h3 className='series__block-title'>{car.title}</h3>
 				<ul className='series__block-list'>

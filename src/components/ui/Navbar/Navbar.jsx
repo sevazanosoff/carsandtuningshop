@@ -30,7 +30,7 @@ const Navbar = () => {
 							to='series'
 							spy={true}
 							smooth={true}
-							offset={-450}
+							offset={0}
 							duration={700}
 							onClick={() => setOpen(false)}>
 							Cars
@@ -51,8 +51,8 @@ const Navbar = () => {
 						Contacts
 					</li>
 				</ul>
+				{open && <Dropdown open={open} onClose={onClose} handleRef={handleRef} />}
 			</nav>
-			{open && <Dropdown open={open} onClose={onClose} handleRef={handleRef} />}
 		</>
 	)
 }

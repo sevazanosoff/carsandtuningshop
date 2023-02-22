@@ -1,10 +1,44 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { carTitle } from '../utils/carTitle'
+import Slider from 'react-slick'
 
 import '../scss/components/CarItem.scss'
 
 const CarItem = ({ data, car }) => {
+	// Slider settings:
+	const settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		padSlides: true,
+	}
+	const settingsBlocks = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 2,
+		slidesToScroll: 1,
+		padSlides: true,
+		responsive: [
+			{
+				breakpoint: 697,
+				settings: {
+					slidesToShow: 1,
+				},
+			},
+		],
+	}
+
+	React.useEffect(() => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		})
+	}, [])
+
 	return (
 		<>
 			<div id='features' className='main__features features'>
@@ -26,59 +60,131 @@ const CarItem = ({ data, car }) => {
 						Discover intuitive control with voice commands
 					</li>
 				</ul>
-				<div className='features__blocks'>
-					<div className='features__block'>
-						<img
-							className='features__block-image'
-							src='https://www.bmw.ua/content/bmw/marketB4R1/bmw_ua/uk_UA/all-models/3-series/sedan/2022/bmw-3-series-sedan-highlights/jcr:content/par/multicontent/tabs/multicontenttab/items/smallteaser/image.transform/smallteaser/image.1662547649260.jpg'
-							alt='feauturesimage'
-						/>
-						<h3 className='features__block-title'>BMW Curved Display.</h3>
-						<p className='features__block-text'>
-							Almost all functions of the car can be controlled using the large curved
-							BMW Curved Display. The driver-facing touch display with intuitive
-							widgets makes driving even more convenient.
-						</p>
+				{window.screen.width < 780 ? (
+					<Slider {...settings}>
+						<div className='features__block'>
+							<img
+								className='features__block-image'
+								src='https://www.bmw.ua/content/bmw/marketB4R1/bmw_ua/uk_UA/all-models/3-series/sedan/2022/bmw-3-series-sedan-highlights/jcr:content/par/multicontent/tabs/multicontenttab/items/smallteaser/image.transform/smallteaser/image.1662547649260.jpg'
+								alt='feauturesimage'
+							/>
+							<h3 className='features__block-title'>BMW Curved Display.</h3>
+							<p className='features__block-text'>
+								Almost all functions of the car can be controlled using the large
+								curved BMW Curved Display. The driver-facing touch display with
+								intuitive widgets makes driving even more convenient.
+							</p>
+						</div>
+						<div className='features__block'>
+							<img
+								className='features__block-image'
+								src='https://www.bmw.ua/content/bmw/marketB4R1/bmw_ua/uk_UA/all-models/3-series/sedan/2022/bmw-3-series-sedan-highlights/jcr:content/par/multicontent/tabs/multicontenttab/items/smallteaser_1058352003/image.transform/smallteaser/image.1662547649313.jpg'
+								alt='feauturesimage'
+							/>
+							<h3 className='features__block-title'>BMW projection display.</h3>
+							<p className='features__block-text'>
+								BMW's full-color head-up display displays all information about the
+								trip directly in the driver's field of vision.
+							</p>
+						</div>
+					</Slider>
+				) : (
+					<div className='features__blocks'>
+						<div className='features__block'>
+							<img
+								className='features__block-image'
+								src='https://www.bmw.ua/content/bmw/marketB4R1/bmw_ua/uk_UA/all-models/3-series/sedan/2022/bmw-3-series-sedan-highlights/jcr:content/par/multicontent/tabs/multicontenttab/items/smallteaser/image.transform/smallteaser/image.1662547649260.jpg'
+								alt='feauturesimage'
+							/>
+							<h3 className='features__block-title'>BMW Curved Display.</h3>
+							<p className='features__block-text'>
+								Almost all functions of the car can be controlled using the large
+								curved BMW Curved Display. The driver-facing touch display with
+								intuitive widgets makes driving even more convenient.
+							</p>
+						</div>
+						<div className='features__block'>
+							<img
+								className='features__block-image'
+								src='https://www.bmw.ua/content/bmw/marketB4R1/bmw_ua/uk_UA/all-models/3-series/sedan/2022/bmw-3-series-sedan-highlights/jcr:content/par/multicontent/tabs/multicontenttab/items/smallteaser_1058352003/image.transform/smallteaser/image.1662547649313.jpg'
+								alt='feauturesimage'
+							/>
+							<h3 className='features__block-title'>BMW projection display.</h3>
+							<p className='features__block-text'>
+								BMW's full-color head-up display displays all information about the
+								trip directly in the driver's field of vision.
+							</p>
+						</div>
 					</div>
-					<div className='features__block'>
-						<img
-							className='features__block-image'
-							src='https://www.bmw.ua/content/bmw/marketB4R1/bmw_ua/uk_UA/all-models/3-series/sedan/2022/bmw-3-series-sedan-highlights/jcr:content/par/multicontent/tabs/multicontenttab/items/smallteaser_1058352003/image.transform/smallteaser/image.1662547649313.jpg'
-							alt='feauturesimage'
-						/>
-						<h3 className='features__block-title'>BMW projection display.</h3>
-						<p className='features__block-text'>
-							BMW's full-color head-up display displays all information about the trip
-							directly in the driver's field of vision.
-						</p>
-					</div>
-				</div>
+				)}
 			</div>
 			<div id='design' className='main__design design'>
 				<h1 className='design__title'>
 					{carTitle('FEATURES OF THE EXTERIOR DESIGN OF', data)}
 				</h1>
-				<div className='design__blocks car__blocks'>
-					{!!car.carDesign &&
-						car.carDesign.map(item => (
-							<div key={uuidv4()} className='design__block car__block'>
-								<img className='design__block-image' src={item.photo} alt='' />
-								<h3 className='design__block-title'>{item.title}</h3>
-								<p className='design__block-text'>{item.text}</p>
-							</div>
-						))}
-				</div>
+				{window.screen.width < 997 ? (
+					<Slider {...settingsBlocks}>
+						{!!car.carDesign &&
+							car.carDesign.map(item => (
+								<div key={uuidv4()} className='design__block car__block'>
+									<img
+										className='design__block-image car__block-image'
+										src={item.photo}
+										alt=''
+									/>
+									<h3 className='design__block-title car__block-title'>
+										{item.title}
+									</h3>
+									<p className='design__block-text car__block-text'>
+										{item.text}
+									</p>
+								</div>
+							))}
+					</Slider>
+				) : (
+					<div className='design__blocks car__blocks'>
+						{!!car.carDesign &&
+							car.carDesign.map(item => (
+								<div key={uuidv4()} className='design__block car__block'>
+									<img className='design__block-image' src={item.photo} alt='' />
+									<h3 className='design__block-title'>{item.title}</h3>
+									<p className='design__block-text'>{item.text}</p>
+								</div>
+							))}
+					</div>
+				)}
 				<h3 className='design__subtitle'>{carTitle('INTERIOR DESIGN', data)}</h3>
-				<div className='design__blocks car__blocks'>
-					{!!car.interiorDesign &&
-						car.interiorDesign.map(item => (
-							<div key={uuidv4()} className='design__block car__block'>
-								<img className='design__block-image' src={item.photo} alt='' />
-								<h3 className='design__block-title'>{item.title}</h3>
-								<p className='design__block-text'>{item.text}</p>
-							</div>
-						))}
-				</div>
+				{window.screen.width < 997 ? (
+					<Slider {...settingsBlocks}>
+						{!!car.interiorDesign &&
+							car.interiorDesign.map(item => (
+								<div key={uuidv4()} className='design__block car__block'>
+									<img
+										className='design__block-image car__block-image'
+										src={item.photo}
+										alt=''
+									/>
+									<h3 className='design__block-title car__block-title'>
+										{item.title}
+									</h3>
+									<p className='design__block-text car__block-text'>
+										{item.text}
+									</p>
+								</div>
+							))}
+					</Slider>
+				) : (
+					<div className='design__blocks car__blocks'>
+						{!!car.interiorDesign &&
+							car.interiorDesign.map(item => (
+								<div key={uuidv4()} className='design__block car__block'>
+									<img className='design__block-image' src={item.photo} alt='' />
+									<h3 className='design__block-title'>{item.title}</h3>
+									<p className='design__block-text'>{item.text}</p>
+								</div>
+							))}
+					</div>
+				)}
 			</div>
 			<div className='main__dynamic dynamic'>
 				<h1 className='dynamic__title'>
@@ -93,16 +199,37 @@ const CarItem = ({ data, car }) => {
 							</li>
 						))}
 				</ul>
-				<div className='dynamic__blocks car__blocks'>
-					{!!car.dynamic &&
-						car.dynamic.map(item => (
-							<div key={uuidv4()} className='dynamic__block car__block'>
-								<img className='design__block-image' src={item.photo} alt='' />
-								<h3 className='design__block-title'>{item.title}</h3>
-								<p className='design__block-text'>{item.text}</p>
-							</div>
-						))}
-				</div>
+				{window.screen.width < 997 ? (
+					<Slider {...settingsBlocks}>
+						{!!car.dynamic &&
+							car.dynamic.map(item => (
+								<div key={uuidv4()} className='dynamic__block car__block'>
+									<img
+										className='design__block-image car__block-image'
+										src={item.photo}
+										alt=''
+									/>
+									<h3 className='design__block-title car__block-title'>
+										{item.title}
+									</h3>
+									<p className='design__block-text car__block-text'>
+										{item.text}
+									</p>
+								</div>
+							))}
+					</Slider>
+				) : (
+					<div className='dynamic__blocks car__blocks'>
+						{!!car.dynamic &&
+							car.dynamic.map(item => (
+								<div key={uuidv4()} className='dynamic__block car__block'>
+									<img className='design__block-image' src={item.photo} alt='' />
+									<h3 className='design__block-title'>{item.title}</h3>
+									<p className='design__block-text'>{item.text}</p>
+								</div>
+							))}
+					</div>
+				)}
 			</div>
 			<div id='specification' className='main__specification specification'>
 				<h1 className='specification__title'>
@@ -139,16 +266,28 @@ const CarItem = ({ data, car }) => {
 					all products are perfectly suited to your new one BMW 3 Series in terms of
 					quality, design and performance.
 				</p>
-				<div className='accesorie__blocks car__blocks'>
-					{!!car.accessories &&
-						car.accessories.map(item => (
-							<div key={uuidv4()} className='accesorie__block car__block'>
-								<img className='accesorie__block-image' src={item.photo} alt='' />
-								<h3 className='accesorie__block-title'>{item.title}</h3>
-								<p className='accesorie__block-text'>{item.text}</p>
-							</div>
-						))}
-				</div>
+				{window.screen.width < 997 ? (
+					<Slider {...settingsBlocks}>
+						{!!car.accessories &&
+							car.accessories.map(item => (
+								<div key={uuidv4()} className='accesorie__block car__block'>
+									<img
+										className='accesorie__block-image car__block-image'
+										src={item.photo}
+										alt=''
+									/>
+									<h3 className='accesorie__block-title car__block-title'>
+										{item.title}
+									</h3>
+									<p className='accesorie__block-text car__block-text'>
+										{item.text}
+									</p>
+								</div>
+							))}
+					</Slider>
+				) : (
+					<div className='accesorie__blocks car__blocks'></div>
+				)}
 			</div>
 		</>
 	)
