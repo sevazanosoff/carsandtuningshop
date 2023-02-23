@@ -15,6 +15,7 @@ const SeriesDropdown = forwardRef(({ handleItem, setHandleItem, setHandler }, re
 	}
 
 	console.log(params.series)
+	console.log(handleItem.title)
 
 	return (
 		<div ref={ref} className='seriers__page-dropdown series__dropdown'>
@@ -39,7 +40,7 @@ const SeriesDropdown = forwardRef(({ handleItem, setHandleItem, setHandler }, re
 						to={handleItem.title.split(' ').join('-')}>
 						Show more
 					</Link>
-					{params.series !== '3' && (
+					{params.series !== '3' && handleItem.title !== 'BMW M3 Sedan' && (
 						<span>Show more works only for 3 series BMWs...</span>
 					)}
 				</div>
