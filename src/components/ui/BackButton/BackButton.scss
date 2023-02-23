@@ -1,0 +1,15 @@
+.backbutton {
+	text-decoration: none;
+	color: black;
+	border: 1px solid black;
+	padding: 5px;
+	cursor: pointer;
+	transition: 0.3s ease-in;
+	&:hover {
+		transition: 0.3s ease-out;
+		transform: scale(1.1);
+	}
+	&::before {
+		content: '\27F5';
+	}
+}

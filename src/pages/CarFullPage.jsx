@@ -1,4 +1,6 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+
 import { v4 as uuidv4 } from 'uuid'
 import { Link as LinkScroll } from 'react-scroll'
 import { useLocation, Link } from 'react-router-dom'
@@ -23,6 +25,54 @@ const CarFullPage = () => {
 	const car = useSelector(state => state.car.item)
 	const status = useSelector(state => state.car.status)
 
+	const aboutVariants = {
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: {
+				delay: 0.5,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			y: -500,
+		},
+		exit: {
+			opacity: 0,
+		},
+	}
+
+	const headerVariants = {
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: {
+				delay: 0.3,
+			},
+		},
+		hidden: {
+			opacity: 0,
+			x: -100,
+		},
+		exit: {
+			opacity: 0,
+		},
+	}
+
+	const navigateVariants = {
+		visible: custom => ({
+			opacity: 1,
+			x: 0,
+			transition: {
+				delay: custom * 0.3,
+			},
+		}),
+		hidden: {
+			x: -100,
+			opacity: 0,
+		},
+	}
+
 	React.useEffect(() => {
 		dispatch(fetchCar(state.data.title.split(' ').splice(1).join('')))
 		if (state.data.tuning === 'M') {
@@ -37,10 +87,17 @@ const CarFullPage = () => {
 	if (status === 'success') {
 		return (
 			<section id='car' className='car'>
-				<header className='car__header'>
-					<h1 className='car__header-title'>{state.data.title}</h1>
+				<motion.header
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true }}
+					className='car__header'>
+					<motion.h1 variants={headerVariants} className='car__header-title'>
+						{state.data.title}
+					</motion.h1>
 					{tuned && (
-						<img
+						<motion.img
+							variants={headerVariants}
 							className='car__header-logo'
 							src='https://seeklogo.com/images/B/bmw-m-performance-logo-949F1C0E03-seeklogo.com.png'
 							alt='mperfomancelogo'
@@ -48,15 +105,21 @@ const CarFullPage = () => {
 					)}
 					<img className='car__header-image' src={car?.background} alt='backgroundcar' />
 					<Link to={-1} className='car__header-btn'></Link>
-				</header>
+				</motion.header>
 				<main className='car__main main'>
 					<div className='main__wrapper'>
-						<div className='main__about'>
+						<motion.div
+							initial='hidden'
+							whileInView='visible'
+							viewport={{ once: true }}
+							className='main__about'>
 							<div className='main__about-blocks'>
 								<div className='main__about-block'>
-									<h3 className='main__about-title'>
+									<motion.h3
+										variants={aboutVariants}
+										className='main__about-title'>
 										{tuned ? 'Power' : 'Fuel consumption (in the mixed cycle)'}
-									</h3>
+									</motion.h3>
 									<p className='main__about-text'>
 										{tuned ? car.horsepower : car.consumption}
 									</p>
@@ -72,11 +135,15 @@ const CarFullPage = () => {
 									</ul>
 								</div>
 							</div>
-						</div>
+						</motion.div>
 						<div className='main__navigate navigate'>
 							<h1 className='navigate__title'>{carTitle('', state.data)}</h1>
 							<nav className='navigate__navbar'>
-								<ul className='navigate__navbar-list'>
+								<motion.ul
+									initial='hidden'
+									whileInView='visible'
+									viewport={{ amount: 0.3, once: true }}
+									className='navigate__navbar-list'>
 									<LinkScroll
 										to='features'
 										className='navigate__navbar-item'
@@ -84,9 +151,12 @@ const CarFullPage = () => {
 										smooth={true}
 										offset={0}
 										duration={500}>
-										<li className='navigate__navbar-item'>
+										<motion.li
+											custom={1}
+											variants={navigateVariants}
+											className='navigate__navbar-item'>
 											Features of technologies
-										</li>
+										</motion.li>
 									</LinkScroll>
 									<LinkScroll
 										to='design'
@@ -94,17 +164,29 @@ const CarFullPage = () => {
 										smooth={true}
 										offset={0}
 										duration={500}>
-										<li className='navigate__navbar-item'>Design</li>
+										<motion.li
+											custom={2}
+											variants={navigateVariants}
+											className='navigate__navbar-item'>
+											Design
+										</motion.li>
 									</LinkScroll>
 									<LinkScroll
+										custom={3}
+										variants={navigateVariants}
 										to='specification'
 										spy={true}
 										smooth={true}
 										offset={0}
 										duration={500}>
-										<li className='navigate__navbar-item'>Specifications</li>
+										<motion.li
+											custom={3}
+											variants={navigateVariants}
+											className='navigate__navbar-item'>
+											Specifications
+										</motion.li>
 									</LinkScroll>
-								</ul>
+								</motion.ul>
 							</nav>
 						</div>
 						<div className='main__infocar infocar'>

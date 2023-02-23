@@ -1,4 +1,6 @@
 import React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
 import { v4 as uuidv4 } from 'uuid'
 
 import Slider from 'react-slick'
@@ -51,12 +53,77 @@ const CarMItem = ({ data, car }) => {
 		],
 	}
 
-	React.useEffect(() => {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth',
-		})
-	}, [])
+	const characteristicsVariants = {
+		visible: custom => ({
+			opacity: 1,
+			y: 0,
+			transition: {
+				delay: custom * 0.2,
+			},
+		}),
+		hidden: {
+			y: -200,
+			opacity: 0,
+		},
+	}
+	const characteristicsLeftVariant = {
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: {
+				delay: 0.2,
+			},
+		},
+		hidden: {
+			x: -200,
+			opacity: 0,
+		},
+	}
+	const characteristicsRightVariant = {
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: {
+				delay: 0.4,
+			},
+		},
+		hidden: {
+			x: 200,
+			opacity: 0,
+		},
+	}
+
+	const specImageVariants = {
+		visible: {
+			opacity: 1,
+			transition: {
+				delay: 0.2,
+			},
+		},
+		hidden: {
+			opacity: 0,
+		},
+	}
+	const specBlocksVariants = {
+		visible: custom => ({
+			opacity: 1,
+			transition: {
+				delay: custom * 0.2,
+			},
+		}),
+		hidden: {
+			opacity: 0,
+		},
+		exit: {
+			opacity: 0,
+		},
+	}
+	// React.useEffect(() => {
+	// 	window.scrollTo({
+	// 		top: 0,
+	// 		behavior: 'smooth',
+	// 	})
+	// }, [])
 
 	return (
 		<>
@@ -64,8 +131,14 @@ const CarMItem = ({ data, car }) => {
 				<h1 className='characteristics__title'>
 					{carTitle('CHARACTERISTICS OF THE ', data)}
 				</h1>
-				<div className='characteristics__wrapper'>
-					<div className='characteristics__block'>
+				<motion.div
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ amount: 0.5, once: true }}
+					className='characteristics__wrapper'>
+					<motion.div
+						variants={characteristicsLeftVariant}
+						className='characteristics__block'>
 						<h1 className='characteristics__block-title'>{carTitle('', data)}</h1>
 						<p className='characteristics__block-text'>{car.about.text}</p>
 						<ul className='characteristics__block-list'>
@@ -75,9 +148,14 @@ const CarMItem = ({ data, car }) => {
 								</li>
 							))}
 						</ul>
-					</div>
-					<img className='characteristics__image' src={car.about.background} alt='bmw' />
-				</div>
+					</motion.div>
+					<motion.img
+						variants={characteristicsRightVariant}
+						className='characteristics__image'
+						src={car.about.background}
+						alt='bmw'
+					/>
+				</motion.div>
 			</div>
 			<div id='features' className='main__features spec'>
 				<h1 className='spec__title'>{carTitle('DIGITAL TECHNOLOGIES OF THE', data)}</h1>
@@ -96,10 +174,14 @@ const CarMItem = ({ data, car }) => {
 						unmistakably indicates the sporty potential of the BMW M3 sedan.
 					</p>
 				</div>
-
 				<div className='spec__wrapper'>
-					<div className='spec__background'>
-						<img
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ amount: 0.2, once: true }}
+						className='spec__background'>
+						<motion.img
+							variants={specImageVariants}
 							className='spec__background-image'
 							src={car.features.background}
 							alt='background'
@@ -124,7 +206,7 @@ const CarMItem = ({ data, car }) => {
 								Design
 							</li>
 						</ul>
-					</div>
+					</motion.div>
 					{window.screen.width < 1200 ? (
 						<Slider {...settingsBlocks}>
 							{handleFeatures &&
@@ -153,15 +235,22 @@ const CarMItem = ({ data, car }) => {
 								))}
 						</Slider>
 					) : (
-						<div
+						<motion.div
+							initial='hidden'
+							animate='visible'
+							exit='exit'
 							className={
 								handleFeatures
 									? 'spec__blocks '
 									: 'spec__blocks spec__blocks-second'
 							}>
 							{handleFeatures &&
-								car.features.dynamic.map(item => (
-									<div key={uuidv4()} className='spec__block'>
+								car.features.dynamic.map((item, index) => (
+									<motion.div
+										custom={index}
+										variants={specBlocksVariants}
+										key={uuidv4()}
+										className='spec__block'>
 										<img
 											className='spec__block-image'
 											src={item.photo}
@@ -169,7 +258,7 @@ const CarMItem = ({ data, car }) => {
 										/>
 										<h3 className='spec__block-title'>{item.title}</h3>
 										<p className='spec__block-text'>{item.text}</p>
-									</div>
+									</motion.div>
 								))}
 							{handleFeatures ? (
 								<span
@@ -187,8 +276,12 @@ const CarMItem = ({ data, car }) => {
 								/>
 							)}
 							{!handleFeatures &&
-								car.features.design.map(item => (
-									<div key={uuidv4()} className='spec__block'>
+								car.features.design.map((item, index) => (
+									<motion.div
+										custom={car.features.design.length - index}
+										variants={specBlocksVariants}
+										key={uuidv4()}
+										className='spec__block'>
 										<img
 											className='spec__block-image'
 											src={item.photo}
@@ -196,9 +289,9 @@ const CarMItem = ({ data, car }) => {
 										/>
 										<h3 className='spec__block-title'>{item.title}</h3>
 										<p className='spec__block-text'>{item.text}</p>
-									</div>
+									</motion.div>
 								))}
-						</div>
+						</motion.div>
 					)}
 				</div>
 			</div>
@@ -229,10 +322,14 @@ const CarMItem = ({ data, car }) => {
 						systems in the .
 					</p>
 				</div>
-
-				<div className='spec__wrapper'>
+				<motion.div
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ amount: 0.2, once: true }}
+					className='spec__wrapper'>
 					<div className='spec__background'>
-						<img
+						<motion.img
+							variants={specImageVariants}
 							className='spec__background-image'
 							src={car.technologies.background}
 							alt='background'
@@ -286,13 +383,20 @@ const CarMItem = ({ data, car }) => {
 								))}
 						</Slider>
 					) : (
-						<div
+						<motion.div
+							initial='hidden'
+							animate='visible'
+							exit='exit'
 							className={
 								handleTech ? 'spec__blocks ' : 'spec__blocks spec__blocks-second'
 							}>
 							{handleTech &&
-								car.technologies.panel.map(item => (
-									<div key={uuidv4()} className='spec__block'>
+								car.technologies.panel.map((item, index) => (
+									<motion.div
+										custom={index}
+										variants={specBlocksVariants}
+										key={uuidv4()}
+										className='spec__block'>
 										<img
 											className='spec__block-image'
 											src={item.photo}
@@ -300,7 +404,7 @@ const CarMItem = ({ data, car }) => {
 										/>
 										<h3 className='spec__block-title'>{item.title}</h3>
 										<p className='spec__block-text'>{item.text}</p>
-									</div>
+									</motion.div>
 								))}
 							{handleTech ? (
 								<span
@@ -318,8 +422,12 @@ const CarMItem = ({ data, car }) => {
 								/>
 							)}
 							{!handleTech &&
-								car.technologies.helpSystem.map(item => (
-									<div key={uuidv4()} className='spec__block'>
+								car.technologies.helpSystem.map((item, index) => (
+									<motion.div
+										custom={car.technologies.helpSystem.length - index}
+										variants={specBlocksVariants}
+										key={uuidv4()}
+										className='spec__block'>
 										<img
 											className='spec__block-image'
 											src={item.photo}
@@ -327,11 +435,11 @@ const CarMItem = ({ data, car }) => {
 										/>
 										<h3 className='spec__block-title'>{item.title}</h3>
 										<p className='spec__block-text'>{item.text}</p>
-									</div>
+									</motion.div>
 								))}
-						</div>
+						</motion.div>
 					)}
-				</div>
+				</motion.div>
 			</div>
 			<div id='specification' className='main__specification specification'>
 				<h1 className='specification__title'>
@@ -346,15 +454,23 @@ const CarMItem = ({ data, car }) => {
 							alt='specificationphoto'
 						/>
 					</div>
-					<div className='specification__block'>
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ amount: 0.2, once: true }}
+						className='specification__block'>
 						{!!car.specifications &&
-							car.specifications.slice(1).map(item => (
-								<div key={uuidv4()} className='specification__block-item'>
+							car.specifications.slice(1).map((item, index) => (
+								<motion.div
+									variants={characteristicsVariants}
+									custom={index}
+									key={uuidv4()}
+									className='specification__block-item'>
 									<h3 className='specification__block-title'>{item.title}</h3>
 									<p className='specification__block-text'>{item.text}</p>
-								</div>
+								</motion.div>
 							))}
-					</div>
+					</motion.div>
 				</div>
 			</div>
 			<div className='main__tuning tuning'>
@@ -393,9 +509,13 @@ const CarMItem = ({ data, car }) => {
 							))}
 						</Slider>
 					) : (
-						<div className='tuning__blocks'>
-							{car.tuning.items.map(item => (
-								<div key={uuidv4()} className='tuning__block'>
+						<motion.div
+							initial='hidden'
+							whileInView='visible'
+							viewport={{ amount: 0.2, once: true }}
+							className='tuning__blocks'>
+							{car.tuning.items.map((item, index) => (
+								<motion.div key={uuidv4()} className='tuning__block'>
 									<img
 										className='tuning__block-image'
 										src={item.photo}
@@ -403,9 +523,9 @@ const CarMItem = ({ data, car }) => {
 									/>
 									<h3 className='tuning__block-title'>{item.title}</h3>
 									<p className='tuning__block-text'>{item.text}</p>
-								</div>
+								</motion.div>
 							))}
-						</div>
+						</motion.div>
 					)}
 				</div>
 			</div>

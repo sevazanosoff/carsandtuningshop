@@ -1,17 +1,20 @@
 import React, { forwardRef } from 'react'
 import { motion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { ReactComponent as MLogo } from '../image/SeriesFullPage/BMWM.svg'
 
 import '../scss/components/SeriesDropdown.scss'
 
 const SeriesDropdown = forwardRef(({ handleItem, setHandleItem, setHandler }, ref) => {
+	const params = useParams()
 	const closeHandler = () => {
 		setHandleItem({})
 		setHandler(false)
 	}
+
+	console.log(params.series)
 
 	return (
 		<div ref={ref} className='seriers__page-dropdown series__dropdown'>
@@ -36,6 +39,9 @@ const SeriesDropdown = forwardRef(({ handleItem, setHandleItem, setHandler }, re
 						to={handleItem.title.split(' ').join('-')}>
 						Show more
 					</Link>
+					{params.series !== '3' && (
+						<span>Show more works only for 3 series BMWs...</span>
+					)}
 				</div>
 			</div>
 			<svg

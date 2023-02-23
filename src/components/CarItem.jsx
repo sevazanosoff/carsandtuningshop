@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid'
 import { carTitle } from '../utils/carTitle'
 import Slider from 'react-slick'
@@ -31,12 +32,41 @@ const CarItem = ({ data, car }) => {
 			},
 		],
 	}
+	const blocksVariants = {
+		visible: custom => ({
+			opacity: 1,
+			transition: {
+				delay: custom * 0.2,
+			},
+		}),
+		hidden: {
+			opacity: 0,
+		},
+	}
+	const characteristicsVariants = {
+		visible: custom => ({
+			opacity: 1,
+			y: 0,
+			transition: {
+				delay: custom * 0.2,
+			},
+		}),
+		hidden: {
+			y: -200,
+			opacity: 0,
+		},
+	}
+
+	let handleRef = React.useRef(false)
 
 	React.useEffect(() => {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth',
-		})
+		if (!handleRef.current) {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth',
+			})
+		}
+		handleRef.current = true
 	}, [])
 
 	return (
@@ -89,8 +119,15 @@ const CarItem = ({ data, car }) => {
 						</div>
 					</Slider>
 				) : (
-					<div className='features__blocks'>
-						<div className='features__block'>
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: true }}
+						className='features__blocks'>
+						<motion.div
+							custom={1}
+							variants={blocksVariants}
+							className='features__block'>
 							<img
 								className='features__block-image'
 								src='https://www.bmw.ua/content/bmw/marketB4R1/bmw_ua/uk_UA/all-models/3-series/sedan/2022/bmw-3-series-sedan-highlights/jcr:content/par/multicontent/tabs/multicontenttab/items/smallteaser/image.transform/smallteaser/image.1662547649260.jpg'
@@ -102,8 +139,11 @@ const CarItem = ({ data, car }) => {
 								curved BMW Curved Display. The driver-facing touch display with
 								intuitive widgets makes driving even more convenient.
 							</p>
-						</div>
-						<div className='features__block'>
+						</motion.div>
+						<motion.div
+							custom={2}
+							variants={blocksVariants}
+							className='features__block'>
 							<img
 								className='features__block-image'
 								src='https://www.bmw.ua/content/bmw/marketB4R1/bmw_ua/uk_UA/all-models/3-series/sedan/2022/bmw-3-series-sedan-highlights/jcr:content/par/multicontent/tabs/multicontenttab/items/smallteaser_1058352003/image.transform/smallteaser/image.1662547649313.jpg'
@@ -114,8 +154,8 @@ const CarItem = ({ data, car }) => {
 								BMW's full-color head-up display displays all information about the
 								trip directly in the driver's field of vision.
 							</p>
-						</div>
-					</div>
+						</motion.div>
+					</motion.div>
 				)}
 			</div>
 			<div id='design' className='main__design design'>
@@ -142,16 +182,24 @@ const CarItem = ({ data, car }) => {
 							))}
 					</Slider>
 				) : (
-					<div className='design__blocks car__blocks'>
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ amount: 0.2, once: true }}
+						className='design__blocks car__blocks'>
 						{!!car.carDesign &&
-							car.carDesign.map(item => (
-								<div key={uuidv4()} className='design__block car__block'>
+							car.carDesign.map((item, index) => (
+								<motion.div
+									variants={blocksVariants}
+									custom={index}
+									key={uuidv4()}
+									className='design__block car__block'>
 									<img className='design__block-image' src={item.photo} alt='' />
 									<h3 className='design__block-title'>{item.title}</h3>
 									<p className='design__block-text'>{item.text}</p>
-								</div>
+								</motion.div>
 							))}
-					</div>
+					</motion.div>
 				)}
 				<h3 className='design__subtitle'>{carTitle('INTERIOR DESIGN', data)}</h3>
 				{window.screen.width < 997 ? (
@@ -174,16 +222,24 @@ const CarItem = ({ data, car }) => {
 							))}
 					</Slider>
 				) : (
-					<div className='design__blocks car__blocks'>
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ amount: 0.2, once: true }}
+						className='design__blocks car__blocks'>
 						{!!car.interiorDesign &&
-							car.interiorDesign.map(item => (
-								<div key={uuidv4()} className='design__block car__block'>
+							car.interiorDesign.map((item, index) => (
+								<motion.ddiv
+									variants={blocksVariants}
+									custom={index}
+									key={uuidv4()}
+									className='design__block car__block'>
 									<img className='design__block-image' src={item.photo} alt='' />
 									<h3 className='design__block-title'>{item.title}</h3>
 									<p className='design__block-text'>{item.text}</p>
-								</div>
+								</motion.ddiv>
 							))}
-					</div>
+					</motion.div>
 				)}
 			</div>
 			<div className='main__dynamic dynamic'>
@@ -219,16 +275,24 @@ const CarItem = ({ data, car }) => {
 							))}
 					</Slider>
 				) : (
-					<div className='dynamic__blocks car__blocks'>
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ amount: 0.2, once: true }}
+						className='dynamic__blocks car__blocks'>
 						{!!car.dynamic &&
-							car.dynamic.map(item => (
-								<div key={uuidv4()} className='dynamic__block car__block'>
+							car.dynamic.map((item, index) => (
+								<motion.div
+									variants={blocksVariants}
+									custom={index}
+									key={uuidv4()}
+									className='dynamic__block car__block'>
 									<img className='design__block-image' src={item.photo} alt='' />
 									<h3 className='design__block-title'>{item.title}</h3>
 									<p className='design__block-text'>{item.text}</p>
-								</div>
+								</motion.div>
 							))}
-					</div>
+					</motion.div>
 				)}
 			</div>
 			<div id='specification' className='main__specification specification'>
@@ -246,15 +310,23 @@ const CarItem = ({ data, car }) => {
 							alt='specificationphoto'
 						/>
 					</div>
-					<div className='specification__block'>
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ amount: 0.2, once: true }}
+						className='specification__block'>
 						{!!car.specifications &&
-							car.specifications.slice(1).map(item => (
-								<div key={uuidv4()} className='specification__block-item'>
+							car.specifications.slice(1).map((item, index) => (
+								<motion.div
+									variants={characteristicsVariants}
+									custom={index}
+									key={uuidv4()}
+									className='specification__block-item'>
 									<h3 className='specification__block-title'>{item.title}</h3>
 									<p className='specification__block-text'>{item.text}</p>
-								</div>
+								</motion.div>
 							))}
-					</div>
+					</motion.div>
 				</div>
 			</div>
 			<div className='main__accesorie accesorie'>
@@ -286,7 +358,32 @@ const CarItem = ({ data, car }) => {
 							))}
 					</Slider>
 				) : (
-					<div className='accesorie__blocks car__blocks'></div>
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ amount: 0.2, once: true }}
+						className='accesorie__blocks car__blocks'>
+						{!!car.accessories &&
+							car.accessories.map((item, index) => (
+								<motion.div
+									variants={blocksVariants}
+									custom={index}
+									key={uuidv4()}
+									className='accesorie__block car__block'>
+									<img
+										className='accesorie__block-image car__block-image'
+										src={item.photo}
+										alt=''
+									/>
+									<h3 className='accesorie__block-title car__block-title'>
+										{item.title}
+									</h3>
+									<p className='accesorie__block-text car__block-text'>
+										{item.text}
+									</p>
+								</motion.div>
+							))}
+					</motion.div>
 				)}
 			</div>
 		</>

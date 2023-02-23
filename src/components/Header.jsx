@@ -8,6 +8,7 @@ import { Navbar } from './ui/Navbar/Navbar'
 import { ReactComponent as Logo } from '../image/Header/Logo.svg'
 
 import '../scss/components/Header.scss'
+import { BackButton } from './ui/BackButton/BackButton'
 
 const Header = () => {
 	const location = useLocation()
@@ -42,7 +43,7 @@ const Header = () => {
 							<Logo />
 							BMW
 						</Link>
-						{location.pathname === '/' && <Navbar />}
+						{location.pathname === '/' ? <Navbar /> : <BackButton />}
 					</div>
 				</div>
 			</motion.header>
