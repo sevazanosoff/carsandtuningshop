@@ -7,14 +7,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchTuningItems } from '../redux/tuning/asyncActions'
 import { Loading } from './ui/Loading/Loading'
 
+import { getTotalPages } from '../utils/getTotalPages'
+
 import '../scss/components/Tuning.scss'
+import { Pagination } from './ui/Pagination/Pagination'
 
 const Tuning = () => {
-	// const [items, setItems] = React.useState([])
+	const [page, setPage] = React.useState(1)
+	const [limit, setLimit] = React.useState(3)
 	const [loading, setLoading] = React.useState(false)
 	const dispatch = useDispatch()
 	const items = useSelector(state => state.tuning.items)
-
+	const lastItem = page * limit
+	const firstItem = lastItem - limit
+	const itemsCurrent = items.slice(firstItem, lastItem)
+	const totalPages = getTotalPages(items, limit)
 	React.useEffect(() => {
 		setLoading(true)
 		// setItems(data)
@@ -68,7 +75,7 @@ const Tuning = () => {
 					animate='visible'
 					viewport={{ amount: 0.2, once: true }}
 					className='tuning__list'>
-					{items.map((item, index) => (
+					{itemsCurrent.map((item, index) => (
 						<Link
 							className='tuning__list-link'
 							key={uuidv4()}
@@ -94,6 +101,9 @@ const Tuning = () => {
 						</Link>
 					))}
 				</motion.ul>
+				<div className='tuning__pagination'>
+					<Pagination totalPages={totalPages} page={page} changePage={p => setPage(p)} />
+				</div>
 			</div>
 		</motion.section>
 	)

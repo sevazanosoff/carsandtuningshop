@@ -1,0 +1,26 @@
+.page {
+	cursor: pointer;
+	font-size: 24px;
+	transition: 0.2s ease-in;
+	&:hover {
+		transform: scale(1.1);
+		transition: 0.2s ease-out;
+	}
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		position: relative;
+		flex-wrap: wrap;
+		gap: 25px;
+		span {
+			width: 30px;
+			height: 30px;
+			text-align: center;
+		}
+	}
+	&__current {
+		@extend .page;
+		color: white;
+		background: black;
+	}
+}
