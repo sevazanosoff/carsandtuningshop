@@ -486,7 +486,7 @@ const CarMItem = ({ data, car }) => {
 						systems in the .
 					</p>
 				</div>
-				<div className='tuning__wrapper'>
+				<div className='tuning__wrapper-background'>
 					<div className='tuning__background'>
 						<img
 							className='tuning__background-image'
